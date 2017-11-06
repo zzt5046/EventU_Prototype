@@ -9,6 +9,6 @@ package eventu_prototype;
  *
  * @author jah6080
  */
-public class MainMenu {
+public class CreateAccount {
     
 }
