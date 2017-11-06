@@ -16,6 +16,7 @@ public class EventU_Prototype {
      */
     public static void main(String[] args) {
         
+        LoginScreenFrame login = new LoginScreenFrame();
     }
     
 }
