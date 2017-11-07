@@ -16,6 +16,29 @@ public class CreateAccountFrame extends javax.swing.JFrame {
      */
     public CreateAccountFrame() {
         initComponents();
+        
+        create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                System.out.println("    --Create account button pressed");
+                int x = 0;
+                
+                if(!inputEmail.getText().isEmpty() && !inputPassword.getText().isEmpty() && !inputConfirm.getText().isEmpty()){
+                    
+                    
+                }
+                new User(inputEmail.getText(), inputPassword.getText(), x);
+                dispose();
+            }
+        });
+        
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                dispose();
+            }
+        });
+        
         setVisible(true);
     }
 
@@ -28,22 +51,124 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        titleText = new javax.swing.JLabel();
+        accountType = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
+        password = new javax.swing.JLabel();
+        confirmPassword = new javax.swing.JLabel();
+        create = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        accountSelect = new javax.swing.JComboBox<>();
+        inputEmail = new javax.swing.JTextField();
+        inputPassword = new javax.swing.JTextField();
+        inputConfirm = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        titleText.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        titleText.setText("Create Account");
+
+        accountType.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        accountType.setText("Account Type:");
+
+        email.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        email.setText("Email:");
+
+        password.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        password.setText("Password:");
+
+        confirmPassword.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        confirmPassword.setText("Confirm Password:");
+
+        create.setText("Create");
+
+        cancel.setText("Cancel");
+
+        accountSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Club" }));
+        accountSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountSelectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 397, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(titleText))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(email)
+                            .addComponent(accountType)
+                            .addComponent(password)
+                            .addComponent(confirmPassword)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(create)
+                                .addGap(24, 24, 24)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(cancel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(accountSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 304, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleText)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accountType)
+                    .addComponent(accountSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(email)
+                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(password)
+                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmPassword)
+                    .addComponent(inputConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(create)
+                    .addComponent(cancel))
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void accountSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accountSelectActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> accountSelect;
+    private javax.swing.JLabel accountType;
+    private javax.swing.JButton cancel;
+    private javax.swing.JLabel confirmPassword;
+    private javax.swing.JButton create;
+    private javax.swing.JLabel email;
+    private javax.swing.JTextField inputConfirm;
+    private javax.swing.JTextField inputEmail;
+    private javax.swing.JTextField inputPassword;
+    private javax.swing.JLabel password;
+    private javax.swing.JLabel titleText;
     // End of variables declaration//GEN-END:variables
 }
