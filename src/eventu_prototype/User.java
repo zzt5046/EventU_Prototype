@@ -5,11 +5,13 @@
  */
 package eventu_prototype;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Zach
  */
-public class User {
+public class User implements Serializable{
     
     private String email;
     private String password;
@@ -24,9 +26,9 @@ public class User {
     //secondary, use for creating
     public User(String email, String password, int profileType){
         
-        setEmail(email);
-        setPassword(password);
-        setProfileType(profileType);
+        this.email = email;
+        this.password = password;
+        this.profileType = profileType;
         
         System.out.println("**New user created.**");
     }
@@ -59,7 +61,4 @@ public class User {
         return profileType;
     }
     
-    void postDB(){
-        
-    }
 }

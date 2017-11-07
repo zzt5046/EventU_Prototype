@@ -5,6 +5,8 @@
  */
 package eventu_prototype;
 
+import java.io.IOException;
+
 /**
  *
  * @author Zach
@@ -14,7 +16,7 @@ public class EventU_Prototype {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         LoginScreenFrame login = new LoginScreenFrame();
     }

@@ -16,6 +16,7 @@ public class LoginScreenFrame extends javax.swing.JFrame {
      */
     public LoginScreenFrame() {
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -54,8 +55,6 @@ public class LoginScreenFrame extends javax.swing.JFrame {
                 emailFieldActionPerformed(evt);
             }
         });
-
-        passwordField.setText("jPasswordField1");
 
         loginButton.setText("Login");
 

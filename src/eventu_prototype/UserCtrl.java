@@ -5,6 +5,13 @@
  */
 package eventu_prototype;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Zach
@@ -35,5 +42,25 @@ public class UserCtrl {
     void setProfileType(int profileType) {
         
         currentUser.setProfileType(profileType);
+    }
+    
+    void saveCredentials() throws FileNotFoundException, IOException{
+        
+        try{
+            
+            //saving object data to file
+            File saveFile = new File("users/" + currentUser.getEmail() + ".txt");
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
+            out.writeObject(currentUser);
+            
+        }catch(FileNotFoundException missingFile){
+            
+            JOptionPane.showMessageDialog(null, "Error regarding save file.","Error",JOptionPane.ERROR_MESSAGE);
+            
+        }catch(IOException ioExcept){
+            
+            JOptionPane.showMessageDialog(null, "Something went wrong.","Error",JOptionPane.ERROR_MESSAGE);
+            
+        }
     }
 }
