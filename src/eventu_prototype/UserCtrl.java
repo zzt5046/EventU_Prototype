@@ -49,7 +49,7 @@ public class UserCtrl {
         try{
             
             //saving object data to file
-            File saveFile = new File("users/" + currentUser.getEmail() + ".txt");
+            File saveFile = new File("users/" + currentUser.getEmail() + ".ser");
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
             out.writeObject(currentUser);
             

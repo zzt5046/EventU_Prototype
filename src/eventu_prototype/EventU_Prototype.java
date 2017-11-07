@@ -19,6 +19,11 @@ public class EventU_Prototype {
     public static void main(String[] args) throws IOException {
         
         LoginScreenFrame login = new LoginScreenFrame();
+       
+        //test creds
+        User zach = new User("zzt5046@psu.edu", "test", 0);
+        UserCtrl ctrl = new UserCtrl(zach);
+        ctrl.saveCredentials();
     }
     
 }
