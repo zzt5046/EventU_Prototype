@@ -24,7 +24,7 @@ public class UserCtrl {
     public UserCtrl(User user){
         
         this.currentUser = user;
-        System.out.println("User controller instantiated");
+        System.out.println("--User controller instantiated");
     }
     
     //requests to model---------------------------
