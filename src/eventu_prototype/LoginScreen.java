@@ -6,8 +6,12 @@
 package eventu_prototype;
 
 import com.sun.jndi.cosnaming.IiopUrl.Address;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,36 +20,59 @@ import java.io.ObjectInputStream;
 public class LoginScreen {
     
     public LoginScreen(){
-        
         System.out.println("--Login backend instantiated");
     }
     
     boolean authenticate(String email, String password){
         
-        String filepath = "users/" + email + ".ser";
+        boolean authenticated = false;
         
-         LoginScreen objectIO = new LoginScreen();
+        try {
+            
+            //find file and read user info
+            FileInputStream fiStream = new FileInputStream(new File("users/" + email + ".ser"));
+            ObjectInputStream oiStream = new ObjectInputStream(fiStream);
 
-        //Read object from file
-        User user = (User) objectIO.ReadFromFile(filepath);
-        System.out.println(user);
-        return true;
-    }
+            // Read objects
+            User userFile = (User) oiStream.readObject();
+
+            //authenticate credentials
+            if(userFile.getEmail().equals(email) && userFile.getPassword().equals(password)){
+                
+                authenticated = true;
+                System.out.println("**User: " + "'" + userFile.getEmail() + "'" + " logged in.**");
+                
+                //open separate menu type depending on account type (individual or club)------------------------------
+                
+                if(userFile.getProfileType() == 0){
+                    IndivMenuFrame soloMenu = new IndivMenuFrame(userFile);
+                }
+                else if(userFile.getProfileType() == 1){
+                    ClubMenuFrame clubMenu = new ClubMenuFrame(userFile);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Something went wrong :(");
+                }
+                
+                oiStream.close();
+                fiStream.close();
+            }
+
+        //catch potential errors-----------------------------------------------
         
-        public Object ReadFromFile(String filepath){
-        
-        try{    
-            FileInputStream fileIn = new FileInputStream(filepath);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+	} catch (FileNotFoundException e) {
             
-            Object obj = objectIn.readObject();
-            objectIn.close();
-            System.out.println("File read successfully.");
-            return obj;
+		System.out.println("File not found");
+                
+	} catch (IOException e) {
             
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+                JOptionPane.showMessageDialog(null, "Error: Something went wrong. Please contact support.");
+		System.out.println("Error initializing stream");
+                
+	} catch (ClassNotFoundException e) {
+            
+		e.printStackTrace();
+		}
+        return authenticated;
     }
 }

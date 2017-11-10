@@ -77,6 +77,10 @@ public class Event {
     
     //getter methods-------------------------------------
     
+    User getUser(){
+        return user;
+    }
+    
     String getName() {
         return name;
     }

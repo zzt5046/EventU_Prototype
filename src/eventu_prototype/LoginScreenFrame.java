@@ -19,6 +19,8 @@ public class LoginScreenFrame extends javax.swing.JFrame {
     public LoginScreenFrame() {
         initComponents();
         
+        //send input credentials to authenticate in backend-----------------------------------
+        
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
@@ -27,12 +29,9 @@ public class LoginScreenFrame extends javax.swing.JFrame {
                 boolean authenticated = loginBackend.authenticate(emailField.getText(), passwordField.getText());
                 
                 if(authenticated){
-                    
-                    IndivMenuFrame indivMenu = new IndivMenuFrame(emailField.getText());
                     dispose();
                 }
                 else {
-                    
                     JOptionPane.showMessageDialog(null, "Your username/password is not correct.","Bad Login",JOptionPane.ERROR_MESSAGE);
                 }
             }

@@ -16,14 +16,19 @@ public class EventU_Prototype {
     /**
      * @param args the command line arguments
      */
+    
+    /* TEST ACCOUNTS
+    -------------------
+    
+        -email          -pass           -desc
+        -------         ------          ------
+        test            test            general test (made first)
+        indiv           test            acct with individual param
+        club            test            acct with club param
+    */
     public static void main(String[] args) throws IOException {
         
         LoginScreenFrame login = new LoginScreenFrame();
-       
-        //test creds
-        User zach = new User("zzt5046@psu.edu", "test", 0);
-        UserCtrl ctrl = new UserCtrl(zach);
-        ctrl.saveCredentials();
     }
     
 }
