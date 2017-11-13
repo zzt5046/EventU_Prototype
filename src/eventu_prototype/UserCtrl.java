@@ -6,10 +6,13 @@
 package eventu_prototype;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,6 +47,7 @@ public class UserCtrl {
         currentUser.setProfileType(profileType);
     }
     
+    //serializes and saves user object data to file system
     void saveCredentials() throws FileNotFoundException, IOException{
         
         try{
@@ -62,5 +66,29 @@ public class UserCtrl {
             JOptionPane.showMessageDialog(null, "Something went wrong.","Error",JOptionPane.ERROR_MESSAGE);
             
         }
+    }
+    
+    //a club user can view their created events
+    ArrayList<Event> getClubEvents(User user) throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        ArrayList<Event> events = new ArrayList<Event>();
+        
+        File folder = new File("events/" + user.getEmail() + "/");
+        File[] listOfFiles = folder.listFiles();
+
+    for (int i = 0; i < listOfFiles.length; i++) {
+      if (listOfFiles[i].isFile()) {
+          
+          //find file and read object info
+            FileInputStream fiStream = new FileInputStream(new File(folder + listOfFiles[i].getName()));
+            ObjectInputStream oiStream = new ObjectInputStream(fiStream);
+
+            //Cast object and add to arraylist
+            Event eventFile = (Event) oiStream.readObject();
+            events.add(eventFile);
+      }
+    }
+        
+        return events;
     }
 }
