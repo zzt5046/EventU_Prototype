@@ -5,7 +5,10 @@
  */
 package eventu_prototype;
 
-import java.io.IOException;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.io.ObjectInputStream;
 
 /**
  *
@@ -26,7 +29,7 @@ public class EventU_Prototype {
         indiv           test            acct with individual param
         club            test            acct with club param
     */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         
         LoginScreenFrame login = new LoginScreenFrame();
     }

@@ -5,11 +5,13 @@
  */
 package eventu_prototype;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Zach
  */
-public class Event {
+public class Event implements Serializable{
     
     User user;
     String name;
@@ -18,7 +20,7 @@ public class Event {
     String location;
     String date;
     String description;
-    float price;
+    double price;
     
     //general use
     public Event(){
@@ -27,7 +29,7 @@ public class Event {
     }
     
     //used for creating new Events
-    public Event(User user, String name, String timeStart, String timeEnd, String location, String date, String description, float price){
+    public Event(User user, String name, String timeStart, String timeEnd, String location, String date, String description, double price){
         
         this.user = user;
         this.name = name;
@@ -105,7 +107,7 @@ public class Event {
         return description;
     }
     
-    float getPrice(){
+    double getPrice(){
         return price;
     }
 }
