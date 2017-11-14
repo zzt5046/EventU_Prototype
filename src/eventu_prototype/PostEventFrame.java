@@ -16,26 +16,56 @@ import javax.swing.JOptionPane;
  */
 public class PostEventFrame extends javax.swing.JFrame {
 
+    User currentUser;
     /**
      * Creates new form PostEventFrame
      */
     public PostEventFrame(User user) {
         
+        currentUser = user;
+        initComponents();
+        
         addEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
-                double price = Double.parseDouble(priceBox.getText());
+                double price = 0;
+                
+                if(!nameBox.getText().isEmpty() && !startBox.getText().isEmpty() && !locationBox.getText().isEmpty() && !dateBox.getText().isEmpty() && !priceBox.getText().isEmpty()){
+                
+                try{
+                    price = Double.parseDouble(priceBox.getText());
+                
                 Event event = new Event(user, nameBox.getText(), startBox.getText(), endBox.getText(), locationBox.getText(), dateBox.getText(), descBox.getText(), price);
                 
                 EventCtrl eventCtrl = new EventCtrl(event);
+                
                 try {
                     eventCtrl.saveEvent();
                 } catch (IOException ex) {
-                    Logger.getLogger(PostEventFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Something went wrong.");
+                }
+                
+                ClubMenuFrame mainMenu = new ClubMenuFrame(currentUser);
+                dispose();
+                
+                } catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(null, "Please enter a valid currency amount.");
+                }
+                
+                }else{
+                    JOptionPane.showMessageDialog(null, "Please fill out all required fields. \nRequired fields marker with (*).");
                 }
             }
         });
-        initComponents();
+        
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                LoginScreenFrame login = new LoginScreenFrame();
+                dispose();
+            }
+        });
+        
         setVisible(true);
     }
 

@@ -78,18 +78,18 @@ public class UserCtrl {
         File folder = new File("events/" + user.getEmail() + "/");
         File[] listOfFiles = folder.listFiles();
 
-    for (int i = 0; i < listOfFiles.length; i++) {
-      if (listOfFiles[i].isFile()) {
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
           
-          //find file and read object info
-            FileInputStream fiStream = new FileInputStream(new File(folder + listOfFiles[i].getName()));
-            ObjectInputStream oiStream = new ObjectInputStream(fiStream);
+                //find file and read object info
+                FileInputStream fiStream = new FileInputStream(new File(folder + listOfFiles[i].getName()));
+                ObjectInputStream oiStream = new ObjectInputStream(fiStream);
 
-            //Cast object and add to arraylist
-            Event eventFile = (Event) oiStream.readObject();
-            events.add(eventFile);
-      }
-    }
+                //Cast object and add to arraylist
+                Event eventFile = (Event) oiStream.readObject();
+                events.add(eventFile);
+            }
+        }
         
         return events;
     }
