@@ -53,6 +53,8 @@ public class UserCtrl {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
             out.writeObject(currentUser);
             
+            System.out.println(currentUser.getEmail() + "'s user info stored.");
+            
         }catch(FileNotFoundException missingFile){
             
             JOptionPane.showMessageDialog(null, "Error regarding save file.","Error",JOptionPane.ERROR_MESSAGE);

@@ -71,6 +71,8 @@ public class EventCtrl {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
             out.writeObject(currentEvent);
             
+            System.out.println(currentEvent.user.getEmail() + "'s event info stored: " + currentEvent.getName());
+            
         }catch(FileNotFoundException missingFile){
             
             JOptionPane.showMessageDialog(null, "Error regarding save file.","Error", JOptionPane.ERROR_MESSAGE);
