@@ -11,4 +11,11 @@ package eventu_prototype;
  */
 public class ClubMenu {
     
+    User currentUser;
+    
+    public ClubMenu(User user){
+        
+        currentUser = user;
+    }
+    
 }

@@ -5,6 +5,10 @@
  */
 package eventu_prototype;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Zach
@@ -12,12 +16,24 @@ package eventu_prototype;
 public class ClubMenuFrame extends javax.swing.JFrame {
 
     User currentUser;
+    ArrayList<Event> events;
+    
     /**
      * Creates new form ClubMenu
      */
     public ClubMenuFrame(User user) {
         
         currentUser = user;
+        UserCtrl ctrl = new UserCtrl(currentUser);
+        
+        try{
+        events = ctrl.getClubEvents(user);
+        } catch(IOException ex) {
+            System.out.println("IOException");
+        } catch(ClassNotFoundException ex3) {
+            System.out.println("ClassNotFoundException");
+        }
+        
         initComponents();
         
         //button to go back to login because not done
