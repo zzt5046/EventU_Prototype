@@ -40,7 +40,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                 }
                 
                 //determine form errors/correctness and create/save new user if valid
-                if(!inputEmail.getText().isEmpty() && !inputPassword.getText().isEmpty() && !inputConfirm.getText().isEmpty()){           
+                if(!inputUsername.getText().isEmpty() && !inputPassword.getText().isEmpty() && !inputConfirm.getText().isEmpty()){           
                     if(!inputPassword.getText().equals(inputConfirm.getText())){   
                         
                         JOptionPane.showMessageDialog(null, "Your password and confirm fields do not match!");
@@ -49,7 +49,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                         
                         //send info to CreateAccount backend
                         try {
-                            backend = new CreateAccount(inputEmail.getText(), inputPassword.getText(), accountValue);
+                            backend = new CreateAccount(inputUsername.getText(), inputPassword.getText(), accountValue);
                         } catch (IOException ex) {
                             Logger.getLogger(CreateAccountFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -84,13 +84,13 @@ public class CreateAccountFrame extends javax.swing.JFrame {
 
         titleText = new javax.swing.JLabel();
         accountType = new javax.swing.JLabel();
-        email = new javax.swing.JLabel();
+        username = new javax.swing.JLabel();
         password = new javax.swing.JLabel();
         confirmPassword = new javax.swing.JLabel();
         create = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         accountSelect = new javax.swing.JComboBox<>();
-        inputEmail = new javax.swing.JTextField();
+        inputUsername = new javax.swing.JTextField();
         inputConfirm = new javax.swing.JPasswordField();
         inputPassword = new javax.swing.JPasswordField();
 
@@ -102,8 +102,8 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         accountType.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         accountType.setText("Account Type:");
 
-        email.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        email.setText("Email:");
+        username.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        username.setText("Username:");
 
         password.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         password.setText("Password:");
@@ -136,7 +136,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(email)
+                                    .addComponent(username)
                                     .addComponent(accountType)
                                     .addComponent(password)
                                     .addComponent(confirmPassword)))
@@ -149,7 +149,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(cancel))
                             .addComponent(accountSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputEmail)
+                            .addComponent(inputUsername)
                             .addComponent(inputConfirm)
                             .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))))
                 .addContainerGap(84, Short.MAX_VALUE))
@@ -165,8 +165,8 @@ public class CreateAccountFrame extends javax.swing.JFrame {
                     .addComponent(accountSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(email)
-                    .addComponent(inputEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(username)
+                    .addComponent(inputUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(password)
@@ -195,11 +195,11 @@ public class CreateAccountFrame extends javax.swing.JFrame {
     private javax.swing.JButton cancel;
     private javax.swing.JLabel confirmPassword;
     private javax.swing.JButton create;
-    private javax.swing.JLabel email;
     private javax.swing.JPasswordField inputConfirm;
-    private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputPassword;
+    private javax.swing.JTextField inputUsername;
     private javax.swing.JLabel password;
     private javax.swing.JLabel titleText;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

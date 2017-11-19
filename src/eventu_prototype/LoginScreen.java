@@ -23,24 +23,24 @@ public class LoginScreen {
         System.out.println("--Login backend instantiated");
     }
     
-    boolean authenticate(String email, String password){
+    boolean authenticate(String username, String password){
         
         boolean authenticated = false;
         
         try {
             
             //find file and read user info
-            FileInputStream fiStream = new FileInputStream(new File("users/" + email + ".ser"));
+            FileInputStream fiStream = new FileInputStream(new File("users/" + username + ".ser"));
             ObjectInputStream oiStream = new ObjectInputStream(fiStream);
 
             // Read objects
             User userFile = (User) oiStream.readObject();
 
             //authenticate credentials
-            if(userFile.getEmail().equals(email) && userFile.getPassword().equals(password)){
+            if(userFile.getUsername().equals(username) && userFile.getPassword().equals(password)){
                 
                 authenticated = true;
-                System.out.println("**User: " + "'" + userFile.getEmail() + "'" + " logged in.**");
+                System.out.println("**User: " + "'" + userFile.getUsername() + "'" + " logged in.**");
                 
                 //open separate menu type depending on account type (individual or club)------------------------------
                 

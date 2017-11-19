@@ -19,6 +19,7 @@ public class Event implements Serializable{
     String timeEnd;
     String location;
     String date;
+    int category;
     String description;
     double price;
     
@@ -29,7 +30,7 @@ public class Event implements Serializable{
     }
     
     //used for creating new Events
-    public Event(User user, String name, String timeStart, String timeEnd, String location, String date, String description, double price){
+    public Event(User user, String name, String timeStart, String timeEnd, String location, String date, int category, String description, double price){
         
         this.user = user;
         this.name = name;
@@ -69,6 +70,11 @@ public class Event implements Serializable{
         this.date = date;
     }
     
+    void setCategory(int category){
+        //Social-0, Sports-1, Fundraising-2, Other-3
+        this.category = category;
+    }
+    
     void setDescription(String description){
         this.description = description;
     }
@@ -101,6 +107,11 @@ public class Event implements Serializable{
     
     String getDate(){
         return date;
+    }
+    
+    int getCategory(){
+        //Social-0, Sports-1, Fundraising-2, Other-3
+        return category;
     }
     
     String getDescription(){

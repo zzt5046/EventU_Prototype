@@ -6,13 +6,10 @@
 package eventu_prototype;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,9 +29,9 @@ public class UserCtrl {
     
     //requests to model---------------------------
     
-    void setEmail(String email) {
+    void setUsername(String username) {
         
-        currentUser.setEmail(email);
+        currentUser.setUsername(username);
     }
 
     void setPassword(String password) {
@@ -53,11 +50,11 @@ public class UserCtrl {
         try{
             
             //saving object data to file
-            File saveFile = new File("users/" + currentUser.getEmail() + ".ser");
+            File saveFile = new File("users/" + currentUser.getUsername() + ".ser");
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
             out.writeObject(currentUser);
             
-            System.out.println(currentUser.getEmail() + "'s user info stored.");
+            System.out.println(currentUser.getUsername() + "'s user info stored.");
             
         }catch(FileNotFoundException missingFile){
             
@@ -70,27 +67,23 @@ public class UserCtrl {
         }
     }
     
-    //a club user can view their created events
-    ArrayList<Event> getClubEvents(User user) throws FileNotFoundException, IOException, ClassNotFoundException{
+    void editUser(){
         
-        ArrayList<Event> events = new ArrayList<Event>();
+        EditUserFrame editUser = new EditUserFrame(currentUser);
+    }
+    
+    void deleteUser(){
         
-        File folder = new File("events/" + user.getEmail() + "/");
-        File[] listOfFiles = folder.listFiles();
-
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-          
-                //find file and read object info
-                FileInputStream fiStream = new FileInputStream(new File(folder + listOfFiles[i].getName()));
-                ObjectInputStream oiStream = new ObjectInputStream(fiStream);
-
-                //Cast object and add to arraylist
-                Event eventFile = (Event) oiStream.readObject();
-                events.add(eventFile);
+        File saveFile = new File("users/" + currentUser.getUsername() + ".ser");
+        
+        try{
+            if(saveFile.delete()){
+    		System.out.println(saveFile.getName() + " is deleted!");
+            }else{
+    		System.out.println("Delete operation failed.");
             }
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        
-        return events;
     }
 }

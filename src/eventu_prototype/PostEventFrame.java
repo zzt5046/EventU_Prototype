@@ -29,13 +29,16 @@ public class PostEventFrame extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
                 double price = 0;
+                int category = 0;
                 
                 if(!nameBox.getText().isEmpty() && !startBox.getText().isEmpty() && !locationBox.getText().isEmpty() && !dateBox.getText().isEmpty() && !priceBox.getText().isEmpty()){
                 
                 try{
+                    
+                    category = categoryBox.getSelectedIndex();
                     price = Double.parseDouble(priceBox.getText());
                 
-                Event event = new Event(user, nameBox.getText(), startBox.getText(), endBox.getText(), locationBox.getText(), dateBox.getText(), descBox.getText(), price);
+                Event event = new Event(user, nameBox.getText(), startBox.getText(), endBox.getText(), locationBox.getText(), dateBox.getText(), category, descBox.getText(), price);
                 
                 EventCtrl eventCtrl = new EventCtrl(event);
                 
@@ -95,6 +98,8 @@ public class PostEventFrame extends javax.swing.JFrame {
         dateBox = new javax.swing.JTextField();
         descBox = new javax.swing.JTextField();
         priceBox = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        categoryBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -165,6 +170,12 @@ public class PostEventFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setText("*Category:");
+
+        categoryBox.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        categoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Social", "Sports", "Fundraising", "Other" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,7 +191,8 @@ public class PostEventFrame extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameBox)
@@ -189,7 +201,8 @@ public class PostEventFrame extends javax.swing.JFrame {
                             .addComponent(locationBox)
                             .addComponent(dateBox)
                             .addComponent(descBox)
-                            .addComponent(priceBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(priceBox, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(categoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(addEvent)
@@ -200,7 +213,7 @@ public class PostEventFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,6 +233,10 @@ public class PostEventFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(dateBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(categoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -228,11 +245,10 @@ public class PostEventFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(priceBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addEvent)
-                    .addComponent(cancel))
-                .addGap(19, 19, 19))
+                    .addComponent(cancel)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -280,6 +296,7 @@ public class PostEventFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEvent;
     private javax.swing.JButton cancel;
+    private javax.swing.JComboBox<String> categoryBox;
     private javax.swing.JTextField dateBox;
     private javax.swing.JTextField descBox;
     private javax.swing.JTextField endBox;
@@ -290,6 +307,7 @@ public class PostEventFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField locationBox;
     private javax.swing.JTextField nameBox;

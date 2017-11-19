@@ -16,18 +16,18 @@ public class CreateAccount {
     User user;
     UserCtrl ctrl;
     
-    public CreateAccount(String email, String password, int accountType) throws IOException{
+    public CreateAccount(String username, String password, int accountType) throws IOException{
         
         //pass immediatly
-        createUser(email, password, accountType);
+        createUser(username, password, accountType);
     }
     
-    void createUser(String email, String password, int accountType) throws IOException{
+    void createUser(String username, String password, int accountType) throws IOException{
         
-        System.out.println("New user created: " + email);
+        System.out.println("New user created: " + username);
         
         //declare user params and save to file in /users
-        user = new User(email, password, accountType);
+        user = new User(username, password, accountType);
         ctrl = new UserCtrl(user);
         ctrl.saveCredentials();
         

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
     
-    private String email;
+    private String username;
     private String password;
     private int profileType;
     
@@ -24,9 +24,9 @@ public class User implements Serializable{
     }
     
     //secondary, use for creating
-    public User(String email, String password, int profileType){
+    public User(String username, String password, int profileType){
         
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.profileType = profileType;
         
@@ -35,8 +35,8 @@ public class User implements Serializable{
 
     //set methods--------------------------------------
     
-    void setEmail(String email) {
-        this.email = email;
+    void setUsername(String username) {
+        this.username = username;
     }
 
     void setPassword(String password) {
@@ -49,8 +49,8 @@ public class User implements Serializable{
     
     //get methods--------------------------------------
     
-    String getEmail() {
-        return email;
+    String getUsername() {
+        return username;
     }
 
     String getPassword() {

@@ -6,10 +6,13 @@
 package eventu_prototype;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +23,14 @@ public class EventCtrl {
     
     Event currentEvent;
     
+    public EventCtrl(){
+        System.out.println("--Event controller instantiated");
+    }
+    
     public EventCtrl(Event event){
         
         this.currentEvent = event;
-        System.out.println("--Event controller instantiated");
+        System.out.println("--Event controller instantiated with event");
     }
     
     //relay info to model
@@ -65,13 +72,13 @@ public class EventCtrl {
         try{
             
             //saving object data to file
-            File saveFile = new File("events/" + currentEvent.user.getEmail() + "/" + currentEvent.getName() + ".ev");
+            File saveFile = new File("events/" + currentEvent.user.getUsername() + "/" + currentEvent.getName() + ".ev");
             saveFile.getParentFile().mkdirs();
             
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
             out.writeObject(currentEvent);
             
-            System.out.println(currentEvent.user.getEmail() + "'s event info stored: " + currentEvent.getName());
+            System.out.println(currentEvent.user.getUsername() + "'s event info stored: " + currentEvent.getName());
             
         }catch(FileNotFoundException missingFile){
             
@@ -82,5 +89,58 @@ public class EventCtrl {
             JOptionPane.showMessageDialog(null, "Something went wrong.","Error", JOptionPane.ERROR_MESSAGE);
             
         }
+    }
+    
+    //a club user can view their created events
+    ArrayList<Event> getClubEvents(User user) throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        ArrayList<Event> events = new ArrayList<>();
+        
+        File folder = new File("events/" + user.getUsername());
+        
+        try{
+            File[] listOfFiles = folder.listFiles();
+        
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile()) {
+                
+                //find file and read object info
+
+                FileInputStream fiStream = new FileInputStream(folder + "/" +listOfFile.getName());
+                ObjectInputStream oiStream = new ObjectInputStream(fiStream);
+                
+                //Cast object and add to arraylist
+                Event eventFile = (Event) oiStream.readObject();
+                events.add(eventFile);
+            }
+        }
+        }catch(NullPointerException ex){
+            System.out.println("**System found no events for user**");
+        }
+        
+        return events;
+    }
+    
+    ArrayList<Event> getAllEvents() throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        ArrayList<Event> events = new ArrayList<Event>();
+        File parentDir = new File("events/");
+        File[] listOfFiles = parentDir.listFiles();
+        
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+          
+                //find file and read object info
+                FileInputStream fiStream = new FileInputStream(new File(parentDir + listOfFiles[i].getName()));
+                System.out.println(listOfFiles[i].getName());
+                ObjectInputStream oiStream = new ObjectInputStream(fiStream);
+
+                //Cast object and add to arraylist
+                Event eventFile = (Event) oiStream.readObject();
+                events.add(eventFile);
+            }
+        }
+        
+        return events;
     }
 }
