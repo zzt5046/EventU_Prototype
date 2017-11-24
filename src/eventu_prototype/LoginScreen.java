@@ -5,7 +5,7 @@
  */
 package eventu_prototype;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
+//import com.sun.jndi.cosnaming.IiopUrl.Address;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,15 +43,16 @@ public class LoginScreen {
                 System.out.println("**User: " + "'" + userFile.getUsername() + "'" + " logged in.**");
                 
                 //open separate menu type depending on account type (individual or club)------------------------------
-                
-                if(userFile.getProfileType() == 0){
-                    IndivMenuFrame soloMenu = new IndivMenuFrame(userFile);
-                }
-                else if(userFile.getProfileType() == 1){
-                    ClubMenuFrame clubMenu = new ClubMenuFrame(userFile);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Something went wrong :(");
+                switch (userFile.getProfileType()) {
+                    case 0:
+                        IndivMenuFrame soloMenu = new IndivMenuFrame(userFile);
+                        break;
+                    case 1:
+                        ClubMenuFrame clubMenu = new ClubMenuFrame(userFile);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Something went wrong :(");
+                        break;
                 }
                 
                 oiStream.close();
