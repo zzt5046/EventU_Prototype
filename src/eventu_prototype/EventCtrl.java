@@ -67,6 +67,35 @@ public class EventCtrl {
         currentEvent.setPrice(price);
     }
     
+    Event getEvent(User user, String name) throws FileNotFoundException, IOException, ClassNotFoundException{
+
+        File folder = new File("events/" + user.getUsername());
+        String mockName = name + ".ev";
+        Event eventFile = null;
+        
+        
+        try{
+            File[] listOfFiles = folder.listFiles();
+        
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile() && mockName.equals(listOfFile.getName())) {
+                
+                //find file and read object info
+                FileInputStream fiStream = new FileInputStream(folder + "/" +listOfFile.getName());
+                ObjectInputStream oiStream = new ObjectInputStream(fiStream);
+                
+                //Cast object
+                eventFile = (Event) oiStream.readObject();
+                break;
+            }
+        }
+        }catch(NullPointerException ex){
+            System.out.println("**System found no events for user**");
+        }
+        
+        return eventFile;
+    }
+    
     void saveEvent() throws FileNotFoundException, IOException{
         
         try{

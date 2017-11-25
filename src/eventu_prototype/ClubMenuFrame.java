@@ -5,11 +5,14 @@
  */
 package eventu_prototype;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -19,6 +22,9 @@ public class ClubMenuFrame extends javax.swing.JFrame {
 
     User currentUser;
     ArrayList<Event> events;
+    DefaultListModel<String> list;
+    JList<String> thingsToDisplay;
+    String selected;
     
     /**
      * Creates new form ClubMenu
@@ -34,14 +40,14 @@ public class ClubMenuFrame extends javax.swing.JFrame {
         try{
         events = ctrl.getClubEvents(user);
         
-        DefaultListModel<String> list = new DefaultListModel<>();
+        list = new DefaultListModel<>();
         
         for(int i = 0; i < events.size(); i++){
             list.addElement(events.get(i).getName());
         }
 
-        JList<String> things = new JList<>(list);
-        scroll.setViewportView(things);
+        thingsToDisplay = new JList<>(list);
+        scroll.setViewportView(thingsToDisplay);
         
         } catch(IOException ex) {
             System.out.println("IOException - no events");
@@ -51,7 +57,7 @@ public class ClubMenuFrame extends javax.swing.JFrame {
         }
         
         //button to go back to login because not done
-        back.addActionListener(new java.awt.event.ActionListener() {
+        logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
                 LoginScreenFrame login = new LoginScreenFrame();
@@ -68,8 +74,27 @@ public class ClubMenuFrame extends javax.swing.JFrame {
             }
         });
         
-        setTitle(currentUser.getUsername() + "'s " + "Events");
+        viewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                try {
+                    ViewEventFrame viewEvent = new ViewEventFrame(currentUser, selected);
+                } catch (IOException ex) {
+                } catch (ClassNotFoundException ex) {
+                }
+            }
+        });
         
+        thingsToDisplay.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                viewDetails.setEnabled(true);
+                selected = thingsToDisplay.getSelectedValue();
+            }
+        });
+        
+        
+        setTitle(currentUser.getUsername() + "'s " + "Events");
         setVisible(true);
     }
 
@@ -83,39 +108,46 @@ public class ClubMenuFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         addEvent = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
+        viewDetails = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel1.setText("Your Events");
 
-        back.setText("Back");
+        logout.setText("Logout");
 
         addEvent.setText("Add Event");
 
         scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        viewDetails.setText("View Details");
+        viewDetails.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(165, 165, 165))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(30, 30, 30)
                 .addComponent(addEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 102, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(165, 165, 165))
+                .addGap(26, 26, 26)
+                .addComponent(viewDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +159,8 @@ public class ClubMenuFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -136,8 +169,9 @@ public class ClubMenuFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEvent;
-    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton logout;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JButton viewDetails;
     // End of variables declaration//GEN-END:variables
 }

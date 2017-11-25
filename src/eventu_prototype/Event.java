@@ -94,7 +94,7 @@ public class Event implements Serializable{
     }
 
     String getTimeStart() {
-        return name;
+        return timeStart;
     }
 
     String getTimeEnd() {
@@ -111,6 +111,30 @@ public class Event implements Serializable{
     
     int getCategory(){
         //Social-0, Sports-1, Fundraising-2, Other-3
+        return category;
+    }
+    
+    String getCategoryName(int num){
+        
+        String category = "";
+        
+         switch (num) {
+         case 0:
+             category = "Social";
+             break;
+         case 1:
+             category = "Sports";
+             break;
+         case 2:
+             category = "Fundraising";
+             break;
+         case 3:
+             category = "Other";
+             break;
+         default:
+             throw new IllegalArgumentException("Invalid integer value: " + num);
+     }
+
         return category;
     }
     
