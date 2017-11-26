@@ -5,6 +5,13 @@
  */
 package eventu_prototype;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 /**
  *
  * @author Zach
@@ -14,9 +21,18 @@ public class IndivMenuFrame extends javax.swing.JFrame {
     /**
      * Creates new form IndivMenuFrame
      */
+    
+    User currentUser;
+    DefaultListModel<String> list;
+    JList<String> thingsToDisplay;
+    String selected;
+    
     public IndivMenuFrame(User user) {
         
+        currentUser = user;
+        
         initComponents();
+        
         
         //button to go back to login because not done
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -24,6 +40,76 @@ public class IndivMenuFrame extends javax.swing.JFrame {
                 
                 LoginScreenFrame login = new LoginScreenFrame();
                 dispose();
+            }
+        });
+        
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                SearchEventFrame searchFrame = new SearchEventFrame(currentUser);
+                dispose();
+            }
+        });
+        
+        setVisible(true);
+    }
+    
+    //same as basic constructor but builds and display list of received events---------------------------------------------------------------------------------
+    public IndivMenuFrame(User user, ArrayList<Event> searchResults){
+        
+        currentUser = user;
+        
+        initComponents();
+        
+        try{
+        list = new DefaultListModel<>();
+        
+        for(int i = 0; i < searchResults.size(); i++){
+            list.addElement(searchResults.get(i).getName());
+        }
+        
+        thingsToDisplay = new JList<>(list);
+        scroll.setViewportView(thingsToDisplay);
+        
+        //add listener for event selection
+        thingsToDisplay.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                viewDetails.setEnabled(true);
+                selected = thingsToDisplay.getSelectedValue();
+            }
+        });
+        
+        } catch(NullPointerException ex){
+            System.out.println("No events.");
+        }
+        
+        //button to go back to login because not done
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                LoginScreenFrame login = new LoginScreenFrame();
+                dispose();
+            }
+        });
+        
+        //search listener
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                SearchEventFrame searchFrame = new SearchEventFrame(currentUser);
+            }
+        });
+        
+        //view details listener
+        viewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                try {
+                    ViewEventFrame viewEvent = new ViewEventFrame(currentUser, selected);
+                } catch (IOException ex) {
+                } catch (ClassNotFoundException ex) {
+                }
             }
         });
         
@@ -43,6 +129,7 @@ public class IndivMenuFrame extends javax.swing.JFrame {
         logoutButton = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
         searchButton = new javax.swing.JButton();
+        viewDetails = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,25 +147,30 @@ public class IndivMenuFrame extends javax.swing.JFrame {
 
         searchButton.setText("New Search");
 
+        viewDetails.setText("View Details");
+        viewDetails.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(titleText)
-                        .addGap(195, 195, 195))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(searchButton)
-                        .addGap(60, 60, 60)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128))))
+                        .addGap(107, 107, 107))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(viewDetails)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +182,8 @@ public class IndivMenuFrame extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -106,5 +199,6 @@ public class IndivMenuFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane scroll;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel titleText;
+    private javax.swing.JButton viewDetails;
     // End of variables declaration//GEN-END:variables
 }

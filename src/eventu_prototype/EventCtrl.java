@@ -180,7 +180,30 @@ public class EventCtrl {
                 fiStream.close();
                 oiStream.close();
             }
-        }   
+            
+            //check subdirs
+            else if(file.isDirectory()){
+                File[] subList = file.listFiles();
+                
+                for (File subFile : subList) {
+                    if (subFile.isFile()) {
+                
+                    //find file and read object info
+                    FileInputStream fiStream = new FileInputStream(new File(subFile.getName()));
+                    System.out.println(subFile.getName());
+                    ObjectInputStream oiStream = new ObjectInputStream(fiStream);
+                
+                    //Cast object and add to arraylist
+                    Event eventFile = (Event) oiStream.readObject();
+                    events.add(eventFile);
+                
+                    fiStream.close();
+                    oiStream.close();
+                    }
+                }
+            }
+        }
+                  
         return events;
     }
     
