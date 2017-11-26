@@ -67,11 +67,6 @@ public class UserCtrl {
         }
     }
     
-    void editUser(){
-        
-        EditUserFrame editUser = new EditUserFrame(currentUser);
-    }
-    
     void deleteUser(){
         
         File saveFile = new File("users/" + currentUser.getUsername() + ".ser");

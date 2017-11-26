@@ -137,7 +137,7 @@ public class ClubMenuFrame extends javax.swing.JFrame {
 
         addEvent.setText("Add Event");
 
-        scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         viewDetails.setText("View Details");
         viewDetails.setEnabled(false);
