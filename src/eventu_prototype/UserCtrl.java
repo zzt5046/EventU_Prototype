@@ -77,7 +77,7 @@ public class UserCtrl {
         File saveFile = new File("users/" + currentUser.getUsername() + ".ser");
         
         try{
-            if(saveFile.delete()){
+            if(saveFile.delete() && saveFile.exists()){
     		System.out.println(saveFile.getName() + " is deleted!");
             }else{
     		System.out.println("Delete operation failed.");

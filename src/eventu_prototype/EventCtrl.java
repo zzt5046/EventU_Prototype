@@ -161,7 +161,7 @@ public class EventCtrl {
     
     ArrayList<Event> getAllEvents() throws FileNotFoundException, IOException, ClassNotFoundException{
         
-        ArrayList<Event> events = new ArrayList<Event>();
+        ArrayList<Event> events = new ArrayList<>();
         File parentDir = new File("events/");
         File[] listOfFiles = parentDir.listFiles();
         
@@ -190,13 +190,10 @@ public class EventCtrl {
           
         try{
             
-            if(eventFile.exists() && eventFile.delete()){
-            
+            if(eventFile.exists() && eventFile.delete()){  
                 System.out.println("File deleted successfully");
-            
             }
             else {
-            
                 System.out.println("Failed to delete the file");
             }
             
