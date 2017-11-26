@@ -77,15 +77,19 @@ public class EventCtrl {
         try{
             File[] listOfFiles = folder.listFiles();
         
-        for (File listOfFile : listOfFiles) {
-            if (listOfFile.isFile() && mockName.equals(listOfFile.getName())) {
+        for (File file : listOfFiles) {
+            if (file.isFile() && mockName.equals(file.getName())) {
                 
                 //find file and read object info
-                FileInputStream fiStream = new FileInputStream(folder + "/" +listOfFile.getName());
+                FileInputStream fiStream = new FileInputStream(folder + "/" +file.getName());
                 ObjectInputStream oiStream = new ObjectInputStream(fiStream);
                 
                 //Cast object
                 eventFile = (Event) oiStream.readObject();
+                
+                fiStream.close();
+                oiStream.close();
+        
                 break;
             }
         }
@@ -109,6 +113,8 @@ public class EventCtrl {
             
             System.out.println(currentEvent.user.getUsername() + "'s event info stored: " + currentEvent.getName());
             
+            out.close();
+            
         }catch(FileNotFoundException missingFile){
             
             JOptionPane.showMessageDialog(null, "Error regarding save file.","Error", JOptionPane.ERROR_MESSAGE);
@@ -130,17 +136,20 @@ public class EventCtrl {
         try{
             File[] listOfFiles = folder.listFiles();
         
-        for (File listOfFile : listOfFiles) {
-            if (listOfFile.isFile()) {
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
                 
                 //find file and read object info
 
-                FileInputStream fiStream = new FileInputStream(folder + "/" +listOfFile.getName());
+                FileInputStream fiStream = new FileInputStream(folder + "/" +file.getName());
                 ObjectInputStream oiStream = new ObjectInputStream(fiStream);
                 
                 //Cast object and add to arraylist
                 Event eventFile = (Event) oiStream.readObject();
                 events.add(eventFile);
+                
+                fiStream.close();
+                oiStream.close();
             }
         }
         }catch(NullPointerException ex){
@@ -156,20 +165,44 @@ public class EventCtrl {
         File parentDir = new File("events/");
         File[] listOfFiles = parentDir.listFiles();
         
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-          
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                
                 //find file and read object info
-                FileInputStream fiStream = new FileInputStream(new File(parentDir + listOfFiles[i].getName()));
-                System.out.println(listOfFiles[i].getName());
+                FileInputStream fiStream = new FileInputStream(new File(parentDir + file.getName()));
+                System.out.println(file.getName());
                 ObjectInputStream oiStream = new ObjectInputStream(fiStream);
-
+                
                 //Cast object and add to arraylist
                 Event eventFile = (Event) oiStream.readObject();
                 events.add(eventFile);
+                
+                fiStream.close();
+                oiStream.close();
             }
+        }   
+        return events;
+    }
+    
+    void deleteEvent(User user, String name) throws FileNotFoundException, IOException{
+        
+        File eventFile = new File("events/" + user.getUsername() + "/" + name + ".ev");
+          
+        try{
+            
+            if(eventFile.exists() && eventFile.delete()){
+            
+                System.out.println("File deleted successfully");
+            
+            }
+            else {
+            
+                System.out.println("Failed to delete the file");
+            }
+            
+        }catch(NullPointerException ex){
+            System.out.println("**System found no events for user**");
         }
         
-        return events;
     }
 }
