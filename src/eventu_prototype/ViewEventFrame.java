@@ -22,10 +22,6 @@ public class ViewEventFrame extends javax.swing.JFrame {
     String selectedEvent;
     Event eventObject;
     EventCtrl ctrl;
-
-    public ViewEventFrame(){
-        
-    }
     
     public ViewEventFrame(User user, String selectedEvent) throws IOException, FileNotFoundException, ClassNotFoundException {
         this.selectedEvent = selectedEvent;
