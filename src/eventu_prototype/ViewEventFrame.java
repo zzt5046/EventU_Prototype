@@ -19,17 +19,16 @@ public class ViewEventFrame extends javax.swing.JFrame {
      * Creates new form ViewEventFrame
      */
     
-    String selectedEvent;
     Event eventObject;
     EventCtrl ctrl;
     
     public ViewEventFrame(User user, String selectedEvent) throws IOException, FileNotFoundException, ClassNotFoundException {
-        this.selectedEvent = selectedEvent;
+        
         ctrl = new EventCtrl();
         eventObject = ctrl.getEvent(user, selectedEvent);
-        
+        System.out.println(eventObject.getName());
         initComponents();
-        setDetails(eventObject);
+        //setDetails(eventObject);
         
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

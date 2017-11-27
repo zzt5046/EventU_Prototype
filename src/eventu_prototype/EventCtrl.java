@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 public class EventCtrl {
     
     Event currentEvent;
+    static String parentDirectory = "events/";
     
     public EventCtrl(){
         System.out.println("--Event controller instantiated");
@@ -69,7 +70,7 @@ public class EventCtrl {
     
     Event getEvent(User user, String name) throws FileNotFoundException, IOException, ClassNotFoundException{
 
-        File folder = new File("events/" + user.getUsername());
+       /* File folder = new File("events/" + user.getUsername());
         String mockName = name + ".ev";
         Event eventFile = null;
         
@@ -95,9 +96,18 @@ public class EventCtrl {
         }
         }catch(NullPointerException ex){
             System.out.println("**System found no events for user**");
-        }
+        }*/
         
-        return eventFile;
+        ArrayList<Event> events = getAllEvents();
+        Event chosenEvent = null;
+        
+        for(Event event : events){
+            if(event.getUser().equals(user) && event.getName().equals(name)){
+                chosenEvent = event;
+            }
+        }
+       
+        return chosenEvent;
     }
     
     void saveEvent() throws FileNotFoundException, IOException{
@@ -162,48 +172,51 @@ public class EventCtrl {
     ArrayList<Event> getAllEvents() throws FileNotFoundException, IOException, ClassNotFoundException{
         
         ArrayList<Event> events = new ArrayList<>();
-        File parentDir = new File("events/");
-        File[] listOfFiles = parentDir.listFiles();
+        Event eventFile;
         
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
+        File directory = new File(parentDirectory);
+        
+        //get all the files from a directory
+        File[] listFiles = directory.listFiles();
+        for (File file : listFiles){
+            if (file.isFile()){
                 
                 //find file and read object info
-                FileInputStream fiStream = new FileInputStream(new File(parentDir + file.getName()));
-                System.out.println(file.getName());
+                FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
                 ObjectInputStream oiStream = new ObjectInputStream(fiStream);
                 
-                //Cast object and add to arraylist
-                Event eventFile = (Event) oiStream.readObject();
-                events.add(eventFile);
+                //Cast object
+                //eventFile = (Event) oiStream.readObject();
+                events.add((Event) oiStream.readObject());
+                //events.add(eventFile);
                 
                 fiStream.close();
                 oiStream.close();
-            }
-            
-            //check subdirs
-            else if(file.isDirectory()){
-                File[] subList = file.listFiles();
                 
-                for (File subFile : subList) {
-                    if (subFile.isFile()) {
+            } else if (file.isDirectory()){
+                
+                File subDirectory = new File(file.getAbsolutePath());
+                File[] listSubFiles = subDirectory.listFiles();
+                
+                for (File subFile : listSubFiles){
+                    if (subFile.isFile()){
                 
                     //find file and read object info
-                    FileInputStream fiStream = new FileInputStream(new File(subFile.getName()));
-                    System.out.println(subFile.getName());
+                    FileInputStream fiStream = new FileInputStream(subFile.getAbsolutePath());
                     ObjectInputStream oiStream = new ObjectInputStream(fiStream);
                 
-                    //Cast object and add to arraylist
-                    Event eventFile = (Event) oiStream.readObject();
-                    events.add(eventFile);
-                
+                    //Cast object
+                    //eventFile = (Event) oiStream.readObject();
+                    events.add((Event) oiStream.readObject());
+                    
                     fiStream.close();
                     oiStream.close();
                     }
                 }
             }
         }
-                  
+        
+        System.out.println(events.size() + " events found.");
         return events;
     }
     

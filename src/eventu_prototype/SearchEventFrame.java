@@ -8,6 +8,7 @@ package eventu_prototype;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,7 @@ public class SearchEventFrame extends javax.swing.JFrame {
     
     public SearchEventFrame(User user) {
         
-        currentUser = user;
+        //currentUser = user;
         initComponents();
         
         buttonGroup1.add(radioName);
@@ -54,7 +55,9 @@ public class SearchEventFrame extends javax.swing.JFrame {
                         ex.printStackTrace();
                     }
                 }
-                dispose();
+                else{
+                    JOptionPane.showMessageDialog(null, "Please select and complete a search option.");
+                }
             }
         });
         
