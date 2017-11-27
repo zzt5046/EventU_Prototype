@@ -20,15 +20,16 @@ public class ViewEventFrame extends javax.swing.JFrame {
      */
     
     Event eventObject;
-    EventCtrl ctrl;
     
-    public ViewEventFrame(User user, String selectedEvent) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public ViewEventFrame(String selectedEvent) throws IOException, FileNotFoundException, ClassNotFoundException {
         
-        ctrl = new EventCtrl();
-        eventObject = ctrl.getEvent(user, selectedEvent);
-        System.out.println(eventObject.getName());
+        EventCtrl ctrl = new EventCtrl();
+        eventObject = ctrl.getEvent(selectedEvent);
+
         initComponents();
-        //setDetails(eventObject);
+        setTitle("Details for event: " + selectedEvent);
+        
+        setDetails(eventObject);
         
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +112,8 @@ public class ViewEventFrame extends javax.swing.JFrame {
 
         categoryVal.setText("jLabel1");
 
+        priceVal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        priceVal.setForeground(new java.awt.Color(80, 191, 43));
         priceVal.setText("jLabel1");
 
         closeButton.setText("Close");
@@ -180,7 +183,7 @@ public class ViewEventFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(description)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(price)
                     .addComponent(priceVal))

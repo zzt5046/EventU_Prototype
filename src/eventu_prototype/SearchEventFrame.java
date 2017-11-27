@@ -26,9 +26,13 @@ public class SearchEventFrame extends javax.swing.JFrame {
         
         //currentUser = user;
         initComponents();
+        setTitle(currentUser + "'s Individual Menu");
+        
+        setTitle("Search Events");
         
         buttonGroup1.add(radioName);
         buttonGroup1.add(radioCategory);
+        radioName.setSelected(true);
         
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,6 +67,8 @@ public class SearchEventFrame extends javax.swing.JFrame {
         
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                IndivMenuFrame indivFrame = new IndivMenuFrame(currentUser);
                 dispose();
             }
         });

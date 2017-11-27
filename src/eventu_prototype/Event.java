@@ -38,6 +38,7 @@ public class Event implements Serializable{
         this.timeEnd = timeEnd;
         this.location = location;
         this.date = date;
+        this.category = category;
         this.description = description;
         this.price = price;
         

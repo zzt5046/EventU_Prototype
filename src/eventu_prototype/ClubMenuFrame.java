@@ -7,8 +7,6 @@ package eventu_prototype;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
@@ -78,7 +76,7 @@ public class ClubMenuFrame extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
                 try {
-                    ViewEventFrame viewEvent = new ViewEventFrame(currentUser, selected);
+                    ViewEventFrame viewEvent = new ViewEventFrame(selected);
                 } catch (IOException ex) {
                 } catch (ClassNotFoundException ex) {
                 }
