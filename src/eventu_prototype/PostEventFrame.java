@@ -64,7 +64,7 @@ public class PostEventFrame extends javax.swing.JFrame {
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
-                LoginScreenFrame login = new LoginScreenFrame();
+                ClubMenuFrame menu = new ClubMenuFrame(currentUser);
                 dispose();
             }
         });

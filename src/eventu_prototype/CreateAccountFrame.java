@@ -94,7 +94,7 @@ public class CreateAccountFrame extends javax.swing.JFrame {
         inputConfirm = new javax.swing.JPasswordField();
         inputPassword = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titleText.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         titleText.setText("Create Account");
