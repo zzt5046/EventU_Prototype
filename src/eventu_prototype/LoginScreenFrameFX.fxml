@@ -13,7 +13,7 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="500.0" prefWidth="305.0" style="-fx-background-color: #c6c6c6;" VBox.vgrow="ALWAYS">
          <children>
             <Button fx:id="login" layoutX="83.0" layoutY="336.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="142.0" text="LOGIN" onAction="#loginButtonPress"/>
-            <Button fx:id="register" layoutX="83.0" layoutY="388.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="142.0" text="REGISTER" onAction="#registerButtonPress"/>
+            <Button fx:id="register" layoutX="83.0" layoutY="388.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="142.0" text="REGISTER" onAction="#loginRegisterButtonPress"/>
             <Text layoutX="103.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find fun your way." />
             <ImageView fitHeight="72.0" fitWidth="200.0" layoutX="56.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" disable="false">
                <image>

@@ -5,9 +5,17 @@
  */
 package eventu_prototype;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +30,16 @@ public class GUIController {
     @FXML
     private TextField passwordLoginField;
     
+    //register elements
+    @FXML
+    private TextField usernameRegisterField;
+    @FXML
+    private TextField passwordRegisterField;
+    @FXML
+    private TextField confirmRegisterField;
+
     
+    //login button - login
     public void loginButtonPress(){
 
         LoginScreen logic = new LoginScreen();
@@ -41,8 +58,20 @@ public class GUIController {
         }
     }
     
-    public void registerButtonPress(){
+    //register button - login
+    @FXML
+    public void loginRegisterButtonPress(ActionEvent event) throws IOException{
         System.out.println("Register pressed");
+        
+        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("CreateAccountFrameFX.fxml"));
+       // primaryStage.setScene(new Scene(root, 305, 500));
+       // Stage.setScene(new Scene(new Pane()));
+    }
+    
+    //register button - register
+    public void registerButtonPress(){
+
     }
     
     public void openIndivMenu(String user){
