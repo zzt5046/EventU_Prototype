@@ -5,7 +5,10 @@
  */
 package eventu_prototype;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,13 +16,40 @@ import javafx.scene.control.Button;
  */
 public class GUIController {
     
-    public Button loginButton;
+    //login elements
+    @FXML
+    private TextField usernameLoginField;
+    @FXML
+    private TextField passwordLoginField;
+    
     
     public void loginButtonPress(){
-        System.out.println("Login pressed");
+
+        LoginScreen logic = new LoginScreen();
+        String un = usernameLoginField.getText();
+        String pw = passwordLoginField.getText();
+        
+        
+        if(un.equals("") || pw.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill out all fields.");
+        }else{
+            if(logic.authenticate(un, pw)){
+                System.out.print("authenticated");
+            }else{
+                JOptionPane.showMessageDialog(null, "Wrong username/password.");
+            }
+        }
     }
     
     public void registerButtonPress(){
         System.out.println("Register pressed");
+    }
+    
+    public void openIndivMenu(String user){
+        
+    }
+    
+    public void openClubMenu(String user){
+        
     }
 }
