@@ -5,16 +5,17 @@
  */
 package eventu_prototype;
 
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.IOException;
-//import java.io.ObjectInputStream;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
  * @author Zach
  */
-public class EventU_Prototype {
+public class EventU_Prototype extends Application{
 
     /**
      * @param args the command line arguments
@@ -31,7 +32,16 @@ public class EventU_Prototype {
     */
     public static void main(String[] args) {
         
-        LoginScreenFrame login = new LoginScreenFrame();
+        Application.launch(EventU_Prototype.class, args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        
+        Parent root = FXMLLoader.load(getClass().getResource("LoginScreenFrameFX.fxml"));
+        
+        primaryStage.setScene(new Scene(root, 305, 500));
+        primaryStage.show();
     }
     
 }
