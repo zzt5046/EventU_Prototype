@@ -6,6 +6,7 @@
 package eventu_prototype;
 
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +31,5 @@ public class CreateAccount {
         user = new User(username, password, accountType);
         ctrl = new UserCtrl(user);
         ctrl.saveCredentials();
-        
     }
 }

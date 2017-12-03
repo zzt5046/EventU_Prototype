@@ -32,13 +32,15 @@ public class EventU_Prototype extends Application{
     */
     public static void main(String[] args) {
         
-        Application.launch(EventU_Prototype.class, args);
+        launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScreenFrameFX.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("LoginScreenFrameFX.fxml"));
+        Parent root = loader.load();
         
         primaryStage.setScene(new Scene(root, 305, 500));
         primaryStage.show();

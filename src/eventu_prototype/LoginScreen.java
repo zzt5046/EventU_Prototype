@@ -47,11 +47,9 @@ public class LoginScreen {
                 //open separate menu type depending on account type (individual or club)------------------------------
                 switch (userFile.getProfileType()) {
                     case 0:
-                        //IndivMenuFrame soloMenu = new IndivMenuFrame(userFile);
                         ctrl.openIndivMenu(username);
                         break;
                     case 1:
-                        ClubMenuFrame clubMenu = new ClubMenuFrame(userFile);
                         ctrl.openClubMenu(username);
                         break;
                     default:
