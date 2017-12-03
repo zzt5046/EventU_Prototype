@@ -27,8 +27,6 @@ import javax.swing.JOptionPane;
  */
 public class GUIController implements Initializable{
     
-    ObservableList<String> categoryList = FXCollections.observableArrayList("Individual", "Club");
-    
     //login screen elements
     @FXML private TextField usernameLoginField;
     @FXML private TextField passwordLoginField;
@@ -37,6 +35,7 @@ public class GUIController implements Initializable{
     @FXML private TextField usernameRegisterField;
     @FXML private PasswordField passwordRegisterField;
     @FXML private PasswordField confirmRegisterField;
+    ObservableList<String> categoryList = FXCollections.observableArrayList("Individual", "Club");
     @FXML private ComboBox accountCategory = new ComboBox();
     
     //indiv menu elements
@@ -70,7 +69,6 @@ public class GUIController implements Initializable{
     
     //register button - login------------------------------------------------------------------------
     @FXML public void loginRegisterButtonPress(ActionEvent event) throws IOException{
-        
         changeScene("CreateAccountFrameFX.fxml", event); 
     }
     
@@ -102,7 +100,7 @@ public class GUIController implements Initializable{
         }
     }
      
-    //register screen cancel
+    //register screen cancel--------------------------------------------------------------------------
     @FXML public void registerCancelPress(ActionEvent event) throws IOException{
         changeScene("LoginScreenFrameFX.fxml", event);
     }
