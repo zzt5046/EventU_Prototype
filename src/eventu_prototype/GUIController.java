@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,7 +57,7 @@ public class GUIController implements Initializable{
     @FXML private ScrollPane clubEventPane = new ScrollPane();
     @FXML private Button viewEventClub = new Button();
     @FXML private Button deleteEventButton = new Button();
-    @FXML private TableView<Event> table;
+    @FXML private TableView<String> clubTable = new TableView<String>();
     
     //add event screen elements
     @FXML private TextField eventNameField;
@@ -66,7 +67,6 @@ public class GUIController implements Initializable{
     @FXML private TextField dateField;
     @FXML private TextArea descField;
     @FXML private TextField priceField;
-    ObservableList<String> eventCategoryList = FXCollections.observableArrayList("Social", "Sports", "Fundraising", "Other");
     @FXML private ComboBox addEventCategory = new ComboBox();
     
     //view event screen elements
@@ -156,18 +156,21 @@ public class GUIController implements Initializable{
         
         EventCtrl backend = new EventCtrl();
         ArrayList<Event> events = backend.getClubEvents(currentUser);
+        Event eventTemp = null;
         
-        ObservableList<Event> eventList = FXCollections.observableArrayList();
-        for(int x = 0; x<events.size(); x++){
-            eventList.add(events.get(x));
+        ObservableList<String> eventList = FXCollections.observableArrayList();
+        System.out.println(events.size() + " events found.");
+        
+        for(int x = 0; x < events.size(); x++){
+            eventTemp = events.get(x);
+            eventList.add(eventTemp.getName());
         }
         
-        table = new TableView<Event>(eventList);
-        TableColumn<Event, String> name = new TableColumn<>("Name");
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        
-        clubEventPane.setContent(table);
-        
+        TableColumn<String, String> col = new TableColumn<>();
+        clubTable.getColumns().addAll(col);
+
+        col.setCellValueFactory(data -> new SimpleStringProperty("name"));
+        clubTable.setItems(eventList);
     }
     
     @FXML public void enableDetailsClub(ActionEvent event){
@@ -292,7 +295,8 @@ public class GUIController implements Initializable{
         keywordRadio.setSelected(true);
         categoryRadio.setToggleGroup(searchGroup);
         
-        //config add event info-------------------------------------------------------------------- 
+        //config add event info--------------------------------------------------------------------
+        ObservableList<String> eventCategoryList = FXCollections.observableArrayList("Social", "Sports", "Fundraising", "Other");
         addEventCategory.setValue("Social");
         addEventCategory.setItems(eventCategoryList);
         
