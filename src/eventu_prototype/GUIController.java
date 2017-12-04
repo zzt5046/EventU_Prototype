@@ -55,7 +55,7 @@ public class GUIController implements Initializable{
     @FXML
     private Button deleteEventButton = new Button();
     @FXML
-    private TableView<String> clubTable = new TableView<>();
+    private TableView<Event> clubTable = new TableView<Event>();
     
     //add event screen elements
     @FXML
@@ -174,21 +174,17 @@ public class GUIController implements Initializable{
         
         EventCtrl backend = new EventCtrl();
         ArrayList<Event> events = backend.getClubEvents(currentUser);
+        System.out.println(events.size() + " events found.");
         Event eventTemp = null;
         
-        ObservableList<String> eventList = FXCollections.observableArrayList();
-        System.out.println(events.size() + " events found.");
-        
-        for(int x = 0; x < events.size(); x++){
-            eventTemp = events.get(x);
-            eventList.add(eventTemp.getName());
-        }
-        
-        TableColumn<String, String> col = new TableColumn<>();
-        col.setCellValueFactory(new PropertyValueFactory<>("name"));
-        
-        clubTable.getColumns().addAll(col);
+        ObservableList<Event> eventList = FXCollections.observableArrayList(events);
         clubTable.setItems(eventList);
+        
+        final TableColumn<Event, String> col = new TableColumn<Event, String>();
+	col.setCellValueFactory(new PropertyValueFactory("eventName"));
+        
+        clubTable.getColumns().setAll(col);
+        clubTable.refresh();
     }
     
     @FXML

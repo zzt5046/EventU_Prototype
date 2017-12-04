@@ -6,6 +6,7 @@
 package eventu_prototype;
 
 import java.io.Serializable;
+import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -22,6 +23,8 @@ public class Event implements Serializable{
     int category;
     String description;
     double price;
+    
+    public StringProperty eventName;
     
     //general use
     public Event(){
@@ -41,6 +44,7 @@ public class Event implements Serializable{
         this.category = category;
         this.description = description;
         this.price = price;
+        eventName.setValue(name);
         
         System.out.println("**New Event created**");
     }
