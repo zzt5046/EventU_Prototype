@@ -20,14 +20,12 @@ public class SearchEvent {
     
     //Social-0, Sports-1, Fundraising-2, Other-3
     
-    User currentUser;
     EventCtrl ctrl;
     ArrayList<Event> results = new ArrayList<>();
     
     //search by keyword/name
-    public SearchEvent(User user, String searchTerm) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public SearchEvent(String searchTerm) throws IOException, FileNotFoundException, ClassNotFoundException{
         
-        currentUser = user;
         ctrl = new EventCtrl();
         
         ArrayList<Event> events = ctrl.getAllEvents();
@@ -38,14 +36,11 @@ public class SearchEvent {
                 results.add(event);
             }
         }
-        
-        sendResults();
     }
     
     //search by category
-    public SearchEvent(User user, int category) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public SearchEvent(int category) throws IOException, FileNotFoundException, ClassNotFoundException{
 
-        currentUser = user;
         ctrl = new EventCtrl();
 
         ArrayList<Event> events = ctrl.getAllEvents();
@@ -55,11 +50,9 @@ public class SearchEvent {
                 results.add(event);
             }
         }
-
-        sendResults();
     }
     
-    void sendResults(){
-        IndivMenuFrame resultsFrame = new IndivMenuFrame(currentUser, results);
+    ArrayList<Event> getResults(){
+        return results;
     }
 }

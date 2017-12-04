@@ -88,7 +88,7 @@ public class EventCtrl {
         try{
             
             //saving object data to file
-            File saveFile = new File("events/" + currentEvent.user.getUsername() + "/" + currentEvent.getName() + ".ev");
+            File saveFile = new File("events/" + currentEvent.getUser().getUsername() + "/" + currentEvent.getName() + ".ev");
             saveFile.getParentFile().mkdirs();
             
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(saveFile));
@@ -112,19 +112,18 @@ public class EventCtrl {
     //a club user can view their created events
     ArrayList<Event> getClubEvents(User user) throws FileNotFoundException, IOException, ClassNotFoundException{
         
-        ArrayList<Event> events = new ArrayList<>();
-        
-        File folder = new File("events/" + user.getUsername());
+        ArrayList<Event> events = new ArrayList<Event>();
+        File eventFolder = new File(parentDirectory + user.getUsername());
         
         try{
-            File[] listOfFiles = folder.listFiles();
+            File[] listOfFiles = eventFolder.listFiles();
         
         for (File file : listOfFiles) {
             if (file.isFile()) {
                 
                 //find file and read object info
 
-                FileInputStream fiStream = new FileInputStream(folder + "/" +file.getName());
+                FileInputStream fiStream = new FileInputStream(eventFolder + "/" +file.getName());
                 ObjectInputStream oiStream = new ObjectInputStream(fiStream);
                 
                 //Cast object and add to arraylist
