@@ -19,12 +19,12 @@ public class SearchEventFrame extends javax.swing.JFrame {
     /**
      * Creates new form SearchEventFrame
      */
-    
+
     User currentUser;
     
     public SearchEventFrame(User user) {
         
-        //currentUser = user;
+        currentUser = user;
         initComponents();
         setTitle(currentUser + "'s Individual Menu");
         

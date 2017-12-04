@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author jah6080
  */
 public class LoginScreenFrame extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form loginScreen
      */

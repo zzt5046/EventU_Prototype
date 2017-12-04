@@ -5,34 +5,20 @@
  */
 package eventu_prototype;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Zach
- */
 public class GUIController implements Initializable{
     
     User selected;
@@ -50,11 +36,10 @@ public class GUIController implements Initializable{
     @FXML private ComboBox accountCategory = new ComboBox();
     
     //indiv menu elements
-    @FXML private ScrollPane indivEventPane = new ScrollPane();
+    @FXML private TableView<String> indivTable = new TableView<>();
     @FXML private Button viewEventIndiv = new Button();
     
     //club menu elements
-    @FXML private ScrollPane clubEventPane = new ScrollPane();
     @FXML private Button viewEventClub = new Button();
     @FXML private Button deleteEventButton = new Button();
     @FXML private TableView<String> clubTable = new TableView<String>();
