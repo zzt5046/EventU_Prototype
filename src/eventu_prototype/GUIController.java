@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -24,46 +25,71 @@ public class GUIController implements Initializable{
     User selected;
     
     //login screen elements
-    @FXML private TextField usernameLoginField;
-    @FXML private TextField passwordLoginField;
+    @FXML
+    private TextField usernameLoginField;
+    @FXML
+    private TextField passwordLoginField;
+    
     public static User currentUser = null;
     
     //register screen elements
-    @FXML private TextField usernameRegisterField;
-    @FXML private PasswordField passwordRegisterField;
-    @FXML private PasswordField confirmRegisterField;
+    @FXML
+    private TextField usernameRegisterField;
+    @FXML
+    private PasswordField passwordRegisterField;
+    @FXML
+    private PasswordField confirmRegisterField;
     ObservableList<String> categoryList = FXCollections.observableArrayList("Individual", "Club");
-    @FXML private ComboBox accountCategory = new ComboBox();
+    @FXML
+    private ComboBox accountCategory = new ComboBox();
     
     //indiv menu elements
-    @FXML private TableView<String> indivTable = new TableView<>();
-    @FXML private Button viewEventIndiv = new Button();
+    @FXML
+    private TableView<String> indivTable = new TableView<>();
+    @FXML
+    private Button viewEventIndiv = new Button();
     
     //club menu elements
-    @FXML private Button viewEventClub = new Button();
-    @FXML private Button deleteEventButton = new Button();
-    @FXML private TableView<String> clubTable = new TableView<String>();
+    @FXML
+    private Button viewEventClub = new Button();
+    @FXML
+    private Button deleteEventButton = new Button();
+    @FXML
+    private TableView<String> clubTable = new TableView<>();
     
     //add event screen elements
-    @FXML private TextField eventNameField;
-    @FXML private TextField startTimeField;
-    @FXML private TextField endTimeField;
-    @FXML private TextField locationField;
-    @FXML private TextField dateField;
-    @FXML private TextArea descField;
-    @FXML private TextField priceField;
-    @FXML private ComboBox addEventCategory = new ComboBox();
+    @FXML
+    private TextField eventNameField;
+    @FXML
+    private TextField startTimeField;
+    @FXML
+    private TextField endTimeField;
+    @FXML
+    private TextField locationField;
+    @FXML
+    private TextField dateField;
+    @FXML
+    private TextArea descField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private ComboBox addEventCategory = new ComboBox();
     
     //view event screen elements
     
     //search event screen elements
-    @FXML private ComboBox eventCategory = new ComboBox();
-    @FXML private RadioButton keywordRadio = new RadioButton();
-    @FXML private RadioButton categoryRadio = new RadioButton();
-    @FXML private ToggleGroup searchGroup = new ToggleGroup();
+    @FXML
+    private ComboBox eventCategory = new ComboBox();
+    @FXML
+    private RadioButton keywordRadio = new RadioButton();
+    @FXML
+    private RadioButton categoryRadio = new RadioButton();
+    @FXML
+    private ToggleGroup searchGroup = new ToggleGroup();
     
     //login screen------------------------------------------------------------------------------
-    @FXML public void loginButtonPress(ActionEvent event) throws IOException, FileNotFoundException, ClassNotFoundException{
+    @FXML
+    public void loginButtonPress(ActionEvent event) throws IOException, FileNotFoundException, ClassNotFoundException{
 
         //LoginScreen logic = new LoginScreen();
         String un = usernameLoginField.getText();
@@ -80,13 +106,15 @@ public class GUIController implements Initializable{
         }
     }
     
-    @FXML public void loginRegisterButtonPress(ActionEvent event) throws IOException{
+    @FXML
+    public void loginRegisterButtonPress(ActionEvent event) throws IOException{
         
         changeScene("CreateAccountFrameFX.fxml", event); 
     }
     
     //register screen-----------------------------------------------------------------------------
-    @FXML public void registerButtonPress(ActionEvent event) throws IOException{
+    @FXML
+    public void registerButtonPress(ActionEvent event) throws IOException{
         
         String un = usernameRegisterField.getText();
         String pw = passwordRegisterField.getText();
@@ -113,25 +141,30 @@ public class GUIController implements Initializable{
         }
     }
      
-    @FXML public void registerCancelPress(ActionEvent event) throws IOException{
+    @FXML
+    public void registerCancelPress(ActionEvent event) throws IOException{
         changeScene("LoginScreenFrameFX.fxml", event);
     }
     
     //individual menu screen-----------------------------------------------------------------------
-    @FXML public void searchPressed(ActionEvent event) throws IOException{
+    @FXML
+    public void searchPressed(ActionEvent event) throws IOException{
         changeScene("SearchEventFrameFX.fxml", event);
     }
     
-    @FXML public void enableDetailsIndiv(ActionEvent event){
+    @FXML
+    public void enableDetailsIndiv(ActionEvent event){
         viewEventIndiv.setDisable(false);
     }
      
     //club menu screen-----------------------------------------------------------------------------
-    @FXML public void addEventScreen(ActionEvent event) throws IOException{
+    @FXML
+    public void addEventScreen(ActionEvent event) throws IOException{
         changeScene("AddEventFrameFX.fxml", event);
     }
     
-    @FXML public void deleteEvent(ActionEvent event) throws IOException{
+    @FXML
+    public void deleteEvent(ActionEvent event) throws IOException{
         
         EventCtrl eventCtrl = new EventCtrl();
         eventCtrl.deleteEvent(currentUser, "insert value from table here");
@@ -152,22 +185,25 @@ public class GUIController implements Initializable{
         }
         
         TableColumn<String, String> col = new TableColumn<>();
+        col.setCellValueFactory(new PropertyValueFactory("name"));
+        
         clubTable.getColumns().addAll(col);
-
-        col.setCellValueFactory(data -> new SimpleStringProperty("name"));
         clubTable.setItems(eventList);
     }
     
-    @FXML public void enableDetailsClub(ActionEvent event){
+    @FXML
+    public void enableDetailsClub(ActionEvent event){
         viewEventClub.setDisable(false);
     }
     
-    @FXML public void enableDelete(ActionEvent event){
+    @FXML
+    public void enableDelete(ActionEvent event){
         deleteEventButton.setDisable(false);
     }
 
     //add event screen-----------------------------------------------------------------------------
-    @FXML public void addEvent(ActionEvent clickEvent) throws IOException, FileNotFoundException, ClassNotFoundException{
+    @FXML
+    public void addEvent(ActionEvent clickEvent) throws IOException, FileNotFoundException, ClassNotFoundException{
         
         String name = eventNameField.getText();
         String start = startTimeField.getText();
@@ -212,18 +248,21 @@ public class GUIController implements Initializable{
         } 
     }
     
-    @FXML public void eventCancel(ActionEvent event) throws IOException{
+    @FXML
+    public void eventCancel(ActionEvent event) throws IOException{
         changeScene("ClubMenuFrameFX.fxml", event);
     }
     
     //search screen--------------------------------------------------------------------------------
-    @FXML public void startSearch(ActionEvent event){
+    @FXML
+    public void startSearch(ActionEvent event){
         
         //SearchEvent search = new SearchEvent();
         populateIndivPane();
     }
     
-    @FXML public void searchCancel(ActionEvent event) throws IOException{
+    @FXML
+    public void searchCancel(ActionEvent event) throws IOException{
         changeScene("IndivMenuFrameFX.fxml", event);
     }
     
@@ -232,7 +271,8 @@ public class GUIController implements Initializable{
     }
     
     //view event screen----------------------------------------------------------------------------
-    @FXML public void cancelView(ActionEvent event) throws IOException{
+    @FXML
+    public void cancelView(ActionEvent event) throws IOException{
         if(currentUser.getProfileType() == 0){
             cancelViewIndiv(event);
         }
@@ -241,20 +281,24 @@ public class GUIController implements Initializable{
         }
     }
     
-    @FXML public void cancelViewIndiv(ActionEvent event) throws IOException{
+    @FXML
+    public void cancelViewIndiv(ActionEvent event) throws IOException{
         changeScene("IndivMenuFrameFX.fxml", event);
     }
     
-    @FXML public void cancelViewClub(ActionEvent event) throws IOException{
+    @FXML
+    public void cancelViewClub(ActionEvent event) throws IOException{
         changeScene("ClubMenuFrameFX.fxml", event);
     }
     
     //standalone methods---------------------------------------------------------------------------
-    @FXML public void viewEvent(ActionEvent event) throws IOException{
+    @FXML
+    public void viewEvent(ActionEvent event) throws IOException{
         changeScene("ViewEventFrameFX.fxml", event);
     }
     
-    @FXML public void logout(ActionEvent event) throws IOException{
+    @FXML
+    public void logout(ActionEvent event) throws IOException{
         changeScene("LoginScreenFrameFX.fxml", event);
     }
     

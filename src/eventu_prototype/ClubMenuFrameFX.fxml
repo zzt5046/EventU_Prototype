@@ -21,11 +21,10 @@
             <Button fx:id="clubLogoutButton" layoutX="85.0" layoutY="465.0" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="142.0" text="LOGOUT" />
             <Button fx:id="deleteEventButton" disable="true" layoutX="86.0" layoutY="426.0" mnemonicParsing="false" onAction="#deleteEvent" prefHeight="32.0" prefWidth="142.0" text="DELETE EVENT" />
             <Button fx:id="createEventButton" layoutX="85.0" layoutY="348.0" mnemonicParsing="false" onAction="#addEventScreen" prefHeight="32.0" prefWidth="142.0" text="ADD EVENT" />
-            <TableView fx:id="table" layoutX="56.0" layoutY="68.0" prefHeight="274.0" prefWidth="200.0">
-              <columns>
-                <TableColumn fx:id="column" prefWidth="75.0" text="Name" />
-              </columns>
-            </TableView>
+            <TableView fx:id="clubTable" layoutX="56.0" layoutY="68.0" prefHeight="274.0" prefWidth="200.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="Name" />
+               </columns></TableView>
          </children>
     </AnchorPane>
   </children>

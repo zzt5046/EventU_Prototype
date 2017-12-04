@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -19,11 +19,7 @@
             </Text>
             <Button fx:id="searchEventButton" layoutX="85.0" layoutY="405.0" mnemonicParsing="false" onAction="#searchPressed" prefHeight="32.0" prefWidth="142.0" text="NEW SEARCH" />
             <Button fx:id="indivLogoutButton" layoutX="85.0" layoutY="452.0" mnemonicParsing="false" onAction="#logout" prefHeight="32.0" prefWidth="142.0" text="LOGOUT" />
-            <ScrollPane fx:id="indivScrollPane" layoutX="57.0" layoutY="76.0" onMouseClicked="#enableDetails" prefHeight="264.0" prefWidth="200.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
-            </ScrollPane>
+            <TableView fx:id="indivTable" layoutX="56.0" layoutY="68.0" prefHeight="272.0" prefWidth="200.0" />
          </children>
     </AnchorPane>
   </children>
