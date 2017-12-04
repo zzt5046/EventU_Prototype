@@ -79,7 +79,7 @@ public class GUIController implements Initializable{
     
     //search event screen elements
     @FXML
-    private ComboBox eventCategory = new ComboBox();
+    private ComboBox searchEventCategory = new ComboBox();
     @FXML
     private RadioButton keywordRadio = new RadioButton();
     @FXML
@@ -185,7 +185,7 @@ public class GUIController implements Initializable{
         }
         
         TableColumn<String, String> col = new TableColumn<>();
-        col.setCellValueFactory(new PropertyValueFactory("name"));
+        col.setCellValueFactory(new PropertyValueFactory<>("name"));
         
         clubTable.getColumns().addAll(col);
         clubTable.setItems(eventList);
@@ -318,8 +318,8 @@ public class GUIController implements Initializable{
         accountCategory.setItems(categoryList);
         
         //config search info------------------------------------------------------------------------
-        eventCategory.setValue("Individual");
-        eventCategory.setItems(categoryList);
+        searchEventCategory.setValue("Individual");
+        searchEventCategory.setItems(categoryList);
         keywordRadio.setToggleGroup(searchGroup);
         keywordRadio.setSelected(true);
         categoryRadio.setToggleGroup(searchGroup);
@@ -329,7 +329,7 @@ public class GUIController implements Initializable{
         addEventCategory.setValue("Social");
         addEventCategory.setItems(eventCategoryList);
         
-        //config view event info--------------------------------------------------------------------  
+        //config view event info-------------------------------------------------------------------- 
     }
     
     //Authenticate login

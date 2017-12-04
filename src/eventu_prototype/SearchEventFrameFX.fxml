@@ -23,7 +23,7 @@
             <RadioButton fx:id="keywordRadio" layoutX="39.0" layoutY="117.0" mnemonicParsing="false" text="Keyword Search" />
             <RadioButton fx:id="categoryRadio" layoutX="39.0" layoutY="193.0" mnemonicParsing="false" text="Category Search" />
             <TextField layoutX="163.0" layoutY="113.0" prefHeight="25.0" prefWidth="108.0" promptText="Search Term" />
-            <ComboBox layoutX="163.0" layoutY="189.0" prefHeight="25.0" prefWidth="108.0" />
+            <ComboBox fx:id="searchEventCategory" layoutX="163.0" layoutY="189.0" prefHeight="25.0" prefWidth="108.0" />
          </children>
     </AnchorPane>
   </children>
