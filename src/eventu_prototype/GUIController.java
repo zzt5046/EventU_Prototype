@@ -17,6 +17,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -56,7 +57,7 @@ public class GUIController implements Initializable{
     @FXML
     private Button deleteEventButton = new Button();
     @FXML
-    private TableView<Event> clubTable = new TableView<Event>();
+    private TableView<Event> clubTable;
     
     //add event screen elements
     @FXML
@@ -176,20 +177,13 @@ public class GUIController implements Initializable{
         EventCtrl backend = new EventCtrl();
         ArrayList<Event> events = backend.getClubEvents(currentUser);
         System.out.println(events.size() + " events found.");
-        Event eventTemp = null;
         
-        ObservableList<Event> eventList = FXCollections.observableArrayList(events);
-        clubTable.setItems(eventList);
+        TableColumn<Event, String> col = new TableColumn<>("Name");
+	col.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
         
-        final TableColumn<Event, String> col = new TableColumn<Event, String>();
-	col.setCellValueFactory(new PropertyValueFactory("eventName"));
-        
-        clubTable.getColumns().setAll(col);
-        stage.setScene(new Scene(clubTable));
-        stage.show();
-        
-      
-        
+        clubTable = new TableView<>();
+        clubTable.setItems(getClubEvents());
+        clubTable.getColumns().addAll(col);
     }
     
     @FXML
@@ -411,4 +405,18 @@ public class GUIController implements Initializable{
         return ret;
     }
     //</editor-fold>
+    
+    public ObservableList<Event> getClubEvents() throws IOException, FileNotFoundException, ClassNotFoundException{
+        
+        ObservableList<Event> tableEvents = FXCollections.observableArrayList();
+        
+        EventCtrl backend = new EventCtrl();
+        ArrayList<Event> gottenEvents = backend.getClubEvents(currentUser);
+        
+        for(int x = 0; x < gottenEvents.size(); x++){
+            tableEvents.add(gottenEvents.get(x));
+        }
+        
+        return tableEvents;
+    }
 }

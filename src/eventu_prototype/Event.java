@@ -24,8 +24,6 @@ public class Event implements Serializable{
     String description;
     double price;
     
-    public StringProperty eventName;
-    
     //general use
     public Event(){
         
@@ -44,7 +42,6 @@ public class Event implements Serializable{
         this.category = category;
         this.description = description;
         this.price = price;
-        eventName.setValue(name);
         
         System.out.println("**New Event created**");
     }
