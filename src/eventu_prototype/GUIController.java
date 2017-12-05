@@ -178,8 +178,8 @@ public class GUIController implements Initializable{
         ArrayList<Event> events = backend.getClubEvents(currentUser);
         System.out.println(events.size() + " events found.");
         
-        TableColumn<Event, String> col = new TableColumn<>("Name");
-	col.setCellValueFactory(new PropertyValueFactory<Event, String>("name"));
+        TableColumn<Event, String> col = new TableColumn<Event, String>("Name");
+	col.setCellValueFactory(new PropertyValueFactory<Event, String>("eventName"));
         
         clubTable = new TableView<>();
         clubTable.setItems(getClubEvents());
