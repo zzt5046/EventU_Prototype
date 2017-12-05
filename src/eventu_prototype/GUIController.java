@@ -17,6 +17,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -171,7 +172,7 @@ public class GUIController implements Initializable{
     }
     
     public void populateClubPane() throws IOException, FileNotFoundException, ClassNotFoundException{
-        
+        /*
         EventCtrl backend = new EventCtrl();
         ArrayList<Event> events = backend.getClubEvents(currentUser);
         System.out.println(events.size() + " events found.");
@@ -185,6 +186,9 @@ public class GUIController implements Initializable{
         
         clubTable.getColumns().setAll(col);
         clubTable.refresh();
+        */
+      
+        
     }
     
     @FXML
