@@ -171,8 +171,8 @@ public class GUIController implements Initializable{
         eventCtrl.deleteEvent(currentUser, "insert value from table here");
     }
     
-    public void populateClubPane() throws IOException, FileNotFoundException, ClassNotFoundException{
-        /*
+    public void populateClubPane(Stage stage) throws IOException, FileNotFoundException, ClassNotFoundException{
+        
         EventCtrl backend = new EventCtrl();
         ArrayList<Event> events = backend.getClubEvents(currentUser);
         System.out.println(events.size() + " events found.");
@@ -185,8 +185,9 @@ public class GUIController implements Initializable{
 	col.setCellValueFactory(new PropertyValueFactory("eventName"));
         
         clubTable.getColumns().setAll(col);
-        clubTable.refresh();
-        */
+        stage.setScene(new Scene(clubTable));
+        stage.show();
+        
       
         
     }
@@ -233,6 +234,7 @@ public class GUIController implements Initializable{
         if(name.equals("") || start.equals("") || end.equals("") || location.equals("") || date.equals("") || desc.equals("")){
             JOptionPane.showMessageDialog(null, "Please fill out all fields.");
         }else{
+            Stage stage = null;
             if(isDouble(priceString)){
                 System.out.println(currentUser + " " + name + " " + start + " " + end + " " + location + " " + date + " " + categoryNum + " " + desc + " " + Double.parseDouble(priceString));
                 Event event = new Event(currentUser, name, start, end, location, date, categoryNum, desc, Double.parseDouble(priceString));
@@ -240,7 +242,7 @@ public class GUIController implements Initializable{
                 backend.saveEvent();
                 
                 JOptionPane.showMessageDialog(null, "Event added!");
-                populateClubPane();
+                populateClubPane(stage);
                 changeScene("ClubMenuFrameFX.fxml", clickEvent); 
             }else{
                 JOptionPane.showMessageDialog(null, "Please enter a number for price.");
@@ -349,7 +351,7 @@ public class GUIController implements Initializable{
 
             //authenticate credentials
             if(userFile.getUsername().equals(username) && userFile.getPassword().equals(password)){
-                
+                Stage stage = null;
                 authenticated = true;
                 
                 UserCtrl ctrl = new UserCtrl();
@@ -364,7 +366,7 @@ public class GUIController implements Initializable{
                         changeScene("IndivMenuFrameFX.fxml", event);
                         break;
                     case 1:
-                        populateClubPane();
+                        populateClubPane(stage);
                         viewEventClub.setDisable(true);
                         deleteEventButton.setDisable(true);
                         changeScene("ClubMenuFrameFX.fxml", event);
