@@ -9,6 +9,16 @@ package eventu_prototype;
  *
  * @author Jason
  */
-public class GUIView {
+public class ClubModel {
+    private String eventName;
     
+    public ClubModel(){
+        
+    }
+    public String getName(){
+        return eventName;
+    }
+    public void setName(){
+        this.eventName = eventName;
+    }
 }

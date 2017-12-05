@@ -9,6 +9,17 @@ package eventu_prototype;
  *
  * @author Jason
  */
-public class GUIModel {
+public class IndividualModel {
     
+    private String eventName;
+    
+    public IndividualModel(){
+        
+    }
+    public String getName(){
+        return eventName;
+    }
+    public void setName(){
+        this.eventName = eventName;
+    }
 }
